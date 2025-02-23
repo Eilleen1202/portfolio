@@ -5,14 +5,13 @@ This text file documents the purpose and usage of tools:
 # script : make backup files by @eilleen1202
 # usage : ./backup.sh target_path(optional/origin) location(placeto make a backup folder) name(of zipfile)
 # effect : Create or modify in readme.txt and zip file named name
-# Ensure the target path ends with a slash
+#  * Ensure the target path ends with a slash
  
 :: compile ::
 #!/bin/bash
 # usage : ./compile exec [.in] [.args] file.{c,o} [compiler arguments]
 # effect : compile files
 #          Write on stderr
-#else
  
 :: excute ::
 # script : excute by @eilleen1202
