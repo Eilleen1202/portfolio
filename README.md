@@ -1,5 +1,5 @@
 # Portfolio
-> Codes created by @Eilleen1202
+> created by @Eilleen1202
 
 ## tools : contains bash script tools that help programming
 - readme.txt : documents purpose and usage of tools
