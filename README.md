@@ -15,3 +15,9 @@ List of commands and its purpose :
 | `./ls_tests.sh name`                              | Create name.txt which contains a list of test filenames recognized by .expect.               |  
 | `./maketst arguments in out`                     | Create I/O test with filename provided later in stdin followed by .args, .in, and .expected. |  
 | `./test_code.sh/ scriptname testfilenames` | Excute I/O testing from a list of test names and write results in stdout                     |  
+
+---------------
+
+## contact info
+e-mail : eilleen1202@gmail.com
+discord : @yeees5004
