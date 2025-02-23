@@ -1,0 +1,69 @@
+#!/bin/bash
+# usage : ./compile exec [.in] [.args] file.{c,o} [compiler arguments]
+# effect : compile files
+#          Write on stderr
+
+exec=${1}
+shift
+
+is_in=0
+is_args=0
+
+CODES=$(mktemp)
+MODULES=$(mktemp)
+COMP=$(mktemp)
+
+for file in ${@}; do
+    if  [ "${file##*\.}" == "c" ]; then
+        echo $file >> ${CODES}
+        shift
+    elif [ "${file##*\.}" == "o" ]; then
+        echo ${file}  >> ${MODULES}
+        shift
+    elif [ "${file##*\.}" == "in" ]; then
+	in="${file}"
+	is_in=1
+	shift
+    elif  [ "${file##*\.}" == "args" ]; then
+    	args="${file}"
+    	is_args=1
+    	shift
+    else
+        echo "${file}" >> ${COMP}
+        shift
+    fi
+done
+
+if [ -z $CODES ]; then
+    echo "Error: files to compile not provided" 2>&1
+    exit 5
+fi
+
+if [ -z $MODULES ]; then
+    echo "/u2/cs136l/pub/common/cs136.o"  >> ${MODULES}
+fi
+
+if [ -z $COMP ]; then
+	#echo "clang $(cat ${MODULES}) $(cat ${CODES}) -o ${exec}"
+	clang $(cat ${MODULES}) $(cat ${CODES}) -o ${exec}
+else
+	#echo "clang $(cat ${COMP}) $(cat ${MODULES}) $(cat ${CODES}) -o ${exec}"
+	clang $(cat ${COMP}) $(cat ${MODULES}) $(cat ${CODES}) -o ${exec}
+fi
+
+if [ ${is_in} -eq 1 ] && [ ${is_args} -eq 1 ]; then
+    #echo "Excute ${codepath} using ${args} with input ${in}."
+    "./${exec}" $(cat ${args}) < ${in}
+elif [ ${is_in} -eq 1 ]; then
+    #echo "Excute ${codepath} with input ${in}."
+    "./${exec}" < ${in}
+elif [ ${is_args} -eq 1 ]; then
+    #echo "Excute ${codepath} using ${args}."
+    "./${exec}" $(cat ${args})
+#else
+    #echo "Test is not excuted"
+fi
+
+rm $CODES
+rm $MODULES
+rm $COMP

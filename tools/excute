@@ -1,0 +1,21 @@
+# script : excute by @eilleen1202
+# usage : /excute filename directory(optional)
+# effect : excute the script filename using parameters. 
+# If permission is not given, add excution permission to all users. 
+
+path=${PWD}
+read parameters
+
+if [ 2 == ${#} ]; then
+	path=$2
+fi
+
+if [ -f ${1} ]; then
+        if [ ! -x ${1} ]; then
+                chmod a+x ${1}
+        fi
+        ${1} "${parameters}"
+else
+	echo "No such file exists"
+fi
+
