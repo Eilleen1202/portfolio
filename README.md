@@ -19,5 +19,5 @@ List of commands and its purpose :
 ---------------
 
 ## contact info
-e-mail : eilleen1202@gmail.com
-discord : @yeees5004
+e-mail : eilleen1202@gmail.com<br/>
+discord : @yeees5004<br/>
